@@ -6,5 +6,16 @@
 
   tasks:
     - name: Running pihole -up
+      async: 2100
+      poll: 0
+      register: pihole_up
       ansible.builtin.shell:
         cmd: pihole -up
+
+    - name: Check progress
+      async_status:
+        jid: "{{ pihole_up.ansible_job_id }}"
+      register: job_result
+      until: job_result.finished
+      delay: 10
+      retries: 300
