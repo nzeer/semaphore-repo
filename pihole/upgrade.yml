@@ -6,11 +6,11 @@
 
   tasks:
     - name: Running pihole -up
+      ansible.builtin.shell:
+        cmd: pihole -up
       async: 2100
       poll: 0
       register: pihole_up
-      ansible.builtin.shell:
-        cmd: pihole -up
 
     - name: Check progress
       async_status:
