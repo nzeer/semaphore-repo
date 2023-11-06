@@ -1,7 +1,0 @@
-- name: Update system
-  pacman:
-    update_cache: yes
-    upgrade: yes
-- name: Install packages
-  pacman:
-    name: "{{ lookup('file', 'files/packages.txt').splitlines() | list }}"

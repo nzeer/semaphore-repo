@@ -1,6 +1,11 @@
 ---
-- hosts: localhost
+- name: Upgrade everything, reboot if required.
+  hosts: andromeda
   become: true
   gather_facts: no
-  roles:
-    - base
+
+  tasks:
+    - name: Upgrade all software.
+      pacman:
+        update_cache: yes
+        upgrade: yes
