@@ -1,0 +1,10 @@
+---
+- name: Update pihole
+  hosts: andromeda
+  become: false
+  gather_facts: no
+
+  tasks:
+    - name: Running yay -Syu
+      ansible.builtin.shell:
+        cmd: yay -Syu
