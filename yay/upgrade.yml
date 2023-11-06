@@ -1,5 +1,5 @@
 ---
-- name: Update pihole
+- name: Yay world update
   hosts: andromeda
   become: false
   gather_facts: no
