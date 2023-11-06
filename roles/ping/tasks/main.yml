@@ -1,4 +1,1 @@
-- hosts:
-    - all
-  tasks:
-    - action: ping
+- name: Ping site
