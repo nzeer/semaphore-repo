@@ -1,0 +1,10 @@
+---
+- name: Update pihole
+  hosts: rpi-pihole
+  become: false
+  gather_facts: no
+
+  tasks:
+    - name: Running pihole -up
+      ansible.builtin.shell:
+        cmd: pihole -up
