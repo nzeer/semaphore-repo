@@ -1,14 +1,13 @@
 ---
 - name: Upgrade everything, reboot if required.
   hosts: rpi-pihole
-  become: true
+  become: false
   gather_facts: no
 
   tasks:
-    - name: Upgrade all software.
-      ansible.builtin.apt:
-        update_cache: true
-        upgrade: dist
+    - name: Running yay -Syu
+      ansible.builtin.shell:
+        cmd: sudo apt update && sudo apt upgrade -y
 
     - name: Check if a reboot is required.
       stat:
@@ -19,7 +18,3 @@
     - name: Reboot the server (if required).
       reboot:
       when: reboot_required_file.stat.exists == true
-
-    - name: Remove dependencies that are no longer required.
-      apt:
-        autoremove: yes
