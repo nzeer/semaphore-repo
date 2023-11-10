@@ -8,6 +8,17 @@
     - name: Running apt upgrade && apt update
       ansible.builtin.shell:
         cmd: sudo apt update && sudo apt upgrade -y
+      async: 2100
+      poll: 0
+      register: apt_up
+
+    - name: Check progress
+      async_status:
+        jid: "{{ apt_up.ansible_job_id }}"
+      register: job_result
+      until: job_result.finished
+      delay: 10
+      retries: 300
 
     - name: Check if a reboot is required.
       stat:
