@@ -1,7 +1,7 @@
 ---
 - name: Upgrade everything, reboot if required.
   hosts: rpi-pihole
-  become: false
+  become: true
   gather_facts: no
 
   tasks:
