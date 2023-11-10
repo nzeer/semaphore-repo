@@ -5,7 +5,7 @@
   gather_facts: no
 
   tasks:
-    - name: Running yay -Syu
+    - name: Running apt upgrade && apt update
       ansible.builtin.shell:
         cmd: sudo apt update && sudo apt upgrade -y
 
