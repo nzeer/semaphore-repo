@@ -1,6 +1,6 @@
 ---
 - name: Upgrade everything, reboot if required.
-  hosts: rpi:children
+  hosts: rpi-cluster
   become: true
   gather_facts: no
 
