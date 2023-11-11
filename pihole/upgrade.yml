@@ -1,8 +1,7 @@
 ---
 - name: Update pihole
-  hosts: rpi-pihole
+  hosts: pihole:children
   become: false
-  gather_facts: no
 
   tasks:
     - name: Running pihole -up

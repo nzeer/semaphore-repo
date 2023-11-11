@@ -1,8 +1,7 @@
 ---
 - name: pacman world update.
-  hosts: andromeda
+  hosts: arch:children
   become: true
-  gather_facts: no
 
   tasks:
     - name: Upgrade all software.
