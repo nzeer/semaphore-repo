@@ -1,0 +1,9 @@
+[andromeda:vars]
+ansible_user="nzeer"
+ansible_become_method="sudo" 
+
+[andromeda]
+172.16.0.70	 
+
+[arch:children]
+andromeda
