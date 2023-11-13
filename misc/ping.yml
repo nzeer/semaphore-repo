@@ -1,4 +1,4 @@
 - hosts:
-    - world:children
+    - all
   tasks:
     - action: ping
