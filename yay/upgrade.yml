@@ -1,10 +1,20 @@
 ---
-- name: Yay world update
-  hosts: andromeda
+- name: yay Update
+  hosts: arch:children
   become: false
-  gather_facts: no
 
   tasks:
     - name: Running yay -Syu
       ansible.builtin.shell:
         cmd: yay -Syu
+      async: 2100
+      poll: 0
+      register: yay_up
+
+    - name: Check progress
+      async_status:
+        jid: "{{ yay_up.ansible_job_id }}"
+      register: job_result
+      until: job_result.finished
+      delay: 10
+      retries: 300
