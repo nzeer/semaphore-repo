@@ -1,6 +1,0 @@
-[world:children]
-pihole
-rpi
-cluster
-arch
-ubuntu
