@@ -5,8 +5,11 @@
 
   tasks:
     - name: Running apt upgrade && apt update
-      ansible.builtin.shell:
-        cmd: sudo apt update && sudo apt upgrade -y
+      ansible.builtin.apt:
+        update_cache: true
+        upgrade: dist
+      # ansible.builtin.shell:
+      # cmd: sudo apt update && sudo apt upgrade -y
       async: 2100
       poll: 0
       register: apt_up
