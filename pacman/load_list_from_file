@@ -1,0 +1,10 @@
+---
+- name: Arch system prep.
+  hosts: arch:children
+  become: true
+
+  tasks:
+    - name: Gather packages to install
+      debug:
+        var: item
+      with_items: "{{ lookup('file', 'pkgs/list.txt').splitlines() }}"

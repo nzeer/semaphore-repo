@@ -1,0 +1,10 @@
+git
+ansible
+glances
+tmux
+neovim
+neofetch
+bottom
+btop
+htop
+

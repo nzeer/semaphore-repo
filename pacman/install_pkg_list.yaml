@@ -1,0 +1,11 @@
+---
+- name: Arch system prep.
+  hosts: arch:children
+  become: true
+
+  tasks:
+    - name: Gather packages to install
+      community.general.pacman:
+        name:
+          - "{{item}}"
+      with_items: "{{ lookup('file', 'pkgs/list.txt').splitlines() }}"
