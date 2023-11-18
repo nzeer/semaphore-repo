@@ -19,3 +19,26 @@
           - ufw
           - ansible
           - extra/jdk-openjdk
+          - w3m
+          - xsensors
+          - psensor
+          - stress
+          - i2c-tools
+          - dkms
+          - powerline
+          - ripgrep
+          - fd
+          - unzip
+          - luarocks
+          - ruby
+          - julia
+          - yarn
+          - perl
+          - alacritty
+          - kitty
+          - extra/neovim-nvim-treesitter
+          - php
+          - npm
+          - nodejs
+          - python-pip
+          - python-pynvim

@@ -1,0 +1,11 @@
+---
+- name: Arch system prep.
+  hosts: arch:children
+  become: false
+
+  tasks:
+    - name: Install AUR base packages via yay
+      community.general.pacman:
+        name: aur/oh-my-bash-git
+        state: present
+        executable: yay
