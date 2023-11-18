@@ -1,6 +1,6 @@
 ---
 - name: Update apt, dist-upgrade, autoclean, & autoremove everything, reboot if required.
-  hosts: cluster:nodes
+  hosts: cluster:cluster
   become: true
 
   tasks:
