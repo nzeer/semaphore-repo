@@ -5,5 +5,5 @@ strict: False
 ipv4: yes
 ports: no
 groups:
-  appliance: "'Amazon' in hostname"
+  appliance: "'genera' in hostname"
   regular: "'host' in hostname"
