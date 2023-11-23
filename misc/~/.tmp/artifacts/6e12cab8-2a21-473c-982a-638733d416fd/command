@@ -1,0 +1,1 @@
+{"command": ["ansible-playbook", "./gather_facts.yml"], "cwd": "/home/nzeer/repos/semaphore-repo/misc/~/.tmp"}
