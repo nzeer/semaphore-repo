@@ -1,0 +1,23 @@
+---
+- name: Update dnf
+  hosts: redhat:children
+  become: true
+
+  tasks:
+    - name: Running apt upgrade && apt update
+      ansible.builtin.dnf:
+        name: "*"
+        state: latest
+      # ansible.builtin.shell:
+      # cmd: sudo apt update && sudo apt upgrade -y
+      async: 2100
+      poll: 0
+      register: dnf_up
+
+    - name: Check progress
+      async_status:
+        jid: "{{ dnf_up.ansible_job_id }}"
+      register: job_result
+      until: job_result.finished
+      delay: 10
+      retries: 300
