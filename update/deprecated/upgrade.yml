@@ -1,0 +1,146 @@
+---
+- name: Update apt, dist-upgrade, autoclean, & autoremove everything, reboot if required.
+  hosts: ubuntu:children
+  become: true
+
+  tasks:
+    - name: Install a list of packages
+      ansible.builtin.apt:
+        pkg:
+          - git
+          - neovim
+          - curl
+          - wget
+          - tmux
+          - glances
+          - htop
+          - btop
+
+      async: 2100
+      poll: 0
+      register: pkg_install
+
+    - name: Run the equivalent of "apt-get clean" as a separate step
+      apt:
+        clean: yes
+
+    - name: Running apt upgrade && apt update
+      ansible.builtin.apt:
+        update_cache: true
+        upgrade: dist
+        autoclean: yes
+        autoremove: yes
+
+      # ansible.builtin.shell:
+      # cmd: sudo apt update && sudo apt upgrade -y
+      async: 2100
+      poll: 0
+      register: apt_up
+
+    - name: Check progress
+      async_status:
+        jid: "{{ apt_up.ansible_job_id }}"
+        jid: "{{ pkg_install.ansible_job_id }}"
+      register: job_result
+      until: job_result.finished
+      delay: 10
+      retries: 300
+
+    #- name: Remove useless packages from the cache
+    #  ansible.builtin.apt:
+    #  autoclean: yes
+
+    # - name: Remove dependencies that are no longer required
+    #  ansible.builtin.apt:
+    # autoremove: yes
+
+    - name: Check if a reboot is required.
+      stat:
+        path: /var/run/reboot-required
+      register: reboot_required_file
+
+    - name: Reboot the server (if required).
+      reboot:
+      when: reboot_required_file.stat.exists == true
+    
+- name: Update pihole
+  hosts: pihole:children
+  become: false
+
+  tasks:
+    - name: Running pihole -up
+      ansible.builtin.shell:
+        cmd: pihole -up
+      async: 2100
+      poll: 0
+      register: pihole_up
+
+    - name: Check progress
+      async_status:
+        jid: "{{ pihole_up.ansible_job_id }}"
+      register: job_result
+      until: job_result.finished
+      delay: 10
+      retries: 300
+
+- name: Upgrade everything, reboot if required.
+  hosts: pihole:children
+  become: true
+
+  tasks:
+    - name: Running apt upgrade && apt update
+      ansible.builtin.apt:
+        update_cache: true
+        upgrade: dist
+      # ansible.builtin.shell:
+      # cmd: sudo apt update && sudo apt upgrade -y
+      async: 2100
+      poll: 0
+      register: apt_up
+
+    - name: Check progress
+      async_status:
+        jid: "{{ apt_up.ansible_job_id }}"
+      register: job_result
+      until: job_result.finished
+      delay: 10
+      retries: 300
+
+    - name: Check if a reboot is required.
+      stat:
+        path: /var/run/reboot-required
+      register: reboot_required_file
+
+    - name: Reboot the server (if required).
+      reboot:
+      when: reboot_required_file.stat.exists == true
+
+- name: pacman world update.
+  hosts: arch:children
+  become: true
+
+  tasks:
+    - name: Upgrade all software.
+      pacman:
+        update_cache: yes
+        upgrade: yes
+
+- name: yay Update
+  hosts: arch:children
+  become: false
+
+  tasks:
+    - name: Running yay -Syu
+      ansible.builtin.shell:
+        cmd: yay -Syu
+      async: 2100
+      poll: 0
+      register: yay_up
+
+    - name: Check progress
+      async_status:
+        jid: "{{ yay_up.ansible_job_id }}"
+      register: job_result
+      until: job_result.finished
+      delay: 10
+      retries: 300

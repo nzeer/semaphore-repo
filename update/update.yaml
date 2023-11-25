@@ -1,0 +1,5 @@
+- import_playbook: ../apt/upgrade.yml
+- import_playbook: ../pihole/upgrade.yml
+- import_playbook: ../pihole/apt-upgrade.yml
+- import_playbook: ../pacman/upgrade.yml
+- import_playbook: ../yay/upgrade.yml
