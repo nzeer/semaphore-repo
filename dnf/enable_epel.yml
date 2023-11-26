@@ -1,6 +1,7 @@
 ---
+- name: Enable epel
 - hosts: all
-  gather_facts: True
+  gather_facts: true
   become: true
   strategy: free
   tasks:
