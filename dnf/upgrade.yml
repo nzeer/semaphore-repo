@@ -4,12 +4,10 @@
   become: true
 
   tasks:
-    - name: Running apt upgrade && apt update
+    - name: Running dnf update
       ansible.builtin.dnf:
         name: "*"
         state: latest
-      # ansible.builtin.shell:
-      # cmd: sudo apt update && sudo apt upgrade -y
       async: 2100
       poll: 0
       register: dnf_up
