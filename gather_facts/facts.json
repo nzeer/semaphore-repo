@@ -1,0 +1,119 @@
+
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [172.16.30.161]
+ok: [172.16.30.70]
+ok: [172.16.30.30]
+ok: [172.16.30.74]
+ok: [172.16.30.73]
+ok: [172.16.0.4]
+ok: [172.16.0.5]
+ok: [172.16.30.72]
+ok: [172.16.30.71]
+
+TASK [Save Distro info] ********************************************************
+ok: [172.16.30.70]
+ok: [172.16.30.30]
+ok: [172.16.0.4]
+ok: [172.16.0.5]
+ok: [172.16.30.71]
+ok: [172.16.30.72]
+ok: [172.16.30.73]
+ok: [172.16.30.74]
+ok: [172.16.30.161]
+
+TASK [System details] **********************************************************
+ok: [172.16.30.70] => (item=Archlinux) => {
+    "msg": "Archlinux"
+}
+ok: [172.16.30.70] => (item=NA) => {
+    "msg": "NA"
+}
+ok: [172.16.30.70] => (item=NA) => {
+    "msg": "NA"
+}
+ok: [172.16.30.30] => (item=Archlinux) => {
+    "msg": "Archlinux"
+}
+ok: [172.16.30.30] => (item=NA) => {
+    "msg": "NA"
+}
+ok: [172.16.30.30] => (item=NA) => {
+    "msg": "NA"
+}
+ok: [172.16.0.4] => (item=Debian) => {
+    "msg": "Debian"
+}
+ok: [172.16.0.4] => (item=11) => {
+    "msg": "11"
+}
+ok: [172.16.0.4] => (item=11) => {
+    "msg": "11"
+}
+ok: [172.16.0.5] => (item=Debian) => {
+    "msg": "Debian"
+}
+ok: [172.16.0.5] => (item=11) => {
+    "msg": "11"
+}
+ok: [172.16.0.5] => (item=11) => {
+    "msg": "11"
+}
+ok: [172.16.30.71] => (item=Debian) => {
+    "msg": "Debian"
+}
+ok: [172.16.30.71] => (item=12.2) => {
+    "msg": "12.2"
+}
+ok: [172.16.30.71] => (item=12) => {
+    "msg": "12"
+}
+ok: [172.16.30.72] => (item=Debian) => {
+    "msg": "Debian"
+}
+ok: [172.16.30.72] => (item=12.2) => {
+    "msg": "12.2"
+}
+ok: [172.16.30.72] => (item=12) => {
+    "msg": "12"
+}
+ok: [172.16.30.73] => (item=Debian) => {
+    "msg": "Debian"
+}
+ok: [172.16.30.73] => (item=12.2) => {
+    "msg": "12.2"
+}
+ok: [172.16.30.73] => (item=12) => {
+    "msg": "12"
+}
+ok: [172.16.30.74] => (item=Debian) => {
+    "msg": "Debian"
+}
+ok: [172.16.30.74] => (item=12.2) => {
+    "msg": "12.2"
+}
+ok: [172.16.30.74] => (item=12) => {
+    "msg": "12"
+}
+ok: [172.16.30.161] => (item=Fedora) => {
+    "msg": "Fedora"
+}
+ok: [172.16.30.161] => (item=39) => {
+    "msg": "39"
+}
+ok: [172.16.30.161] => (item=39) => {
+    "msg": "39"
+}
+
+PLAY RECAP *********************************************************************
+172.16.0.4                 : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+172.16.0.5                 : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+172.16.30.161              : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+172.16.30.30               : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+172.16.30.70               : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+172.16.30.71               : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+172.16.30.72               : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+172.16.30.73               : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+172.16.30.74               : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

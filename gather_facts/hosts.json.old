@@ -37,17 +37,9 @@
                 "ip": "172.16.10.1",
                 "name": "172.16.10.1"
             },
-            "172.16.10.102": {
-                "ip": "172.16.10.102",
-                "name": "172.16.10.102"
-            },
-            "172.16.10.208": {
-                "ip": "172.16.10.208",
-                "name": "172.16.10.208"
-            },
-            "172.16.10.81": {
-                "ip": "172.16.10.81",
-                "name": "172.16.10.81"
+            "172.16.10.103": {
+                "ip": "172.16.10.103",
+                "name": "172.16.10.103"
             },
             "172.16.11.1": {
                 "ip": "172.16.11.1",
@@ -72,6 +64,10 @@
             "Main-Bedroom-3.genera.homenet.lan": {
                 "ip": "172.16.10.62",
                 "name": "Main-Bedroom-3.genera.homenet.lan"
+            },
+            "Main-Bedroom.genera.homenet.lan": {
+                "ip": "172.16.10.52",
+                "name": "Main-Bedroom.genera.homenet.lan"
             },
             "Main-Floor.genera.homenet.lan": {
                 "ip": "172.16.10.58",
@@ -145,6 +141,14 @@
                 "ip": "172.16.0.10",
                 "name": "pve01"
             },
+            "pve02": {
+                "ip": "172.16.0.11",
+                "name": "pve02"
+            },
+            "pve03": {
+                "ip": "172.16.0.12",
+                "name": "pve03"
+            },
             "rs.homenet.lan": {
                 "ip": "172.16.0.50",
                 "name": "rs.homenet.lan"
@@ -166,6 +170,8 @@
             "pi01",
             "pi02",
             "pve01",
+            "pve02",
+            "pve03",
             "172.16.0.41",
             "172.16.0.42",
             "rs.homenet.lan",
@@ -180,15 +186,14 @@
             "172.16.0.250",
             "172.16.10.1",
             "14pm.genera.homenet.lan",
+            "Main-Bedroom.genera.homenet.lan",
             "Main-Floor.genera.homenet.lan",
             "Main-Bedroom-3.genera.homenet.lan",
-            "172.16.10.81",
-            "172.16.10.102",
+            "172.16.10.103",
             "bedroom.genera.homenet.lan",
             "node03.genera.homenet.lan",
             "Rob-Office-2.genera.homenet.lan",
             "Rob-Office.genera.homenet.lan",
-            "172.16.10.208",
             "172.16.11.1",
             "172.16.20.1",
             "172.16.30.1",

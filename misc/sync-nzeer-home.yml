@@ -1,0 +1,22 @@
+- name: Synchronize passing in extra rsync options
+  hosts: fedora
+  become: true
+
+  tasks:
+    - name: Synchronizing directory (/home/nzeer)
+      ansible.posix.synchronize:
+        mode: push
+        src: /home/nzeer
+        dest: /home/
+        ssh_connection_multiplexing: true
+        links: true
+        recursive: true
+        rsync_opts:
+          - "--no-motd"
+          - "--exclude=.cache"
+          - "--exclude=.tmp"
+          - "--exclude=.test"
+          - "--exclude=.ssh"
+          - "--exclude=old"
+          - "--exclude=backup"
+          - "--exclude=nzeer"

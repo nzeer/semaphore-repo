@@ -3,4 +3,3 @@
 - import_playbook: ../pihole/apt-upgrade.yml
 - import_playbook: ../dnf/upgrade.yml
 - import_playbook: ../pacman/upgrade.yml
-- import_playbook: ../yay/upgrade.yml

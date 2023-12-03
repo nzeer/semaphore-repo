@@ -9,8 +9,8 @@ import ansible_runner
 # Define a function to run an Ansible playbook
 def run_playbook(playbook, inventory):
     # Create an Ansible runner object
-    r = ansible_runner.run(private_data_dir= "~/.tmp", playbook=playbook)
-    
+    r = ansible_runner.run(private_data_dir="./.tmp", playbook=playbook)
+
     # playbook=playbook, inventory=inventory, remote_user="nzeer", become=True)
     # Run the playbook and get the results
     results = r.stats
@@ -19,9 +19,13 @@ def run_playbook(playbook, inventory):
 
 
 # Define a function to parse the results and get the OS information
-def get_os_info(results):
+def get_os_info(results={"ip": 1}):
     # Initialize an empty dictionary to store the OS information
     os_info = {}
+    if results == None:
+        print("results empty")
+        quit()
+    print(results)
     # Loop through the results
     for host, data in results.items():
         # Check if the data has ansible_facts key
