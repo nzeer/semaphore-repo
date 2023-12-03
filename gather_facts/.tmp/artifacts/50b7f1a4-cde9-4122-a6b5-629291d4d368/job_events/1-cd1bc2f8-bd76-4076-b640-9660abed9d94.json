@@ -1,1 +1,0 @@
-{"event": "verbose", "uuid": "cd1bc2f8-bd76-4076-b640-9660abed9d94", "counter": 1, "stdout": "\u001b[0;31mERROR! the playbook: ./gather_facts.yml could not be found\u001b[0m", "start_line": 0, "end_line": 1, "runner_ident": "50b7f1a4-cde9-4122-a6b5-629291d4d368", "created": "2023-11-29T23:06:27.981187+00:00"}
