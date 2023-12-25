@@ -7,4 +7,5 @@ neofetch
 bottom
 btop
 htop
+vim
 
