@@ -1,0 +1,38 @@
+---
+- hosts: arch
+  gather_facts: no
+  become: true
+  
+  tasks:
+    - name: test unreachable
+      ansible.builtin.ping:
+      register: test_ssh
+      ignore_unreachable: true
+
+    - name: test
+      fail:
+        msg: "test"
+      when: test_ssh.unreachable is defined
+
+    - name: header CSV
+      lineinfile:
+          insertafter: EOF
+          dest: /home/nzeer/test/ansible/out/list.csv
+          line: "Server;OS;access"
+      delegate_to: localhost
+
+    - name: Info
+      lineinfile:
+          dest: /home/nzeer/test/ansible/out/list.csv
+          line: "{{ inventory_hostname }};OK"
+          state: present
+      when: test_ssh == "successful"
+      delegate_to: localhost
+
+    - name: Info csv
+      lineinfile:
+          dest: /home/nzeer/test/ansible/out/list.csv
+          line: "{{ inventory_hostname }};KO"
+          state: present
+      when: test_ssh.unreachable is undefined
+      delegate_to: localhost
