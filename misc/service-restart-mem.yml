@@ -1,0 +1,18 @@
+---
+- name: Restart gateway service if Memory Usage is High
+  hosts:
+  - servers
+  tasks:
+    - name: Check if qpdf is running
+      shell: pgrep qpdf
+      register: qpdf_pid
+      ignore_errors: true
+
+    - name: Get memory usage of qpdf
+      shell: ps -o %mem -p {{ qpdf_pid.stdout }} | awk 'NR>1 {print $1}'
+      register: qpdf_mem_usage
+      when: qpdf_pid.rc == 0
+
+    - name: Restart qpdf if memory usage is above 98%
+      shell: /usr/bin/systemctl restart teamc2
+      when: qpdf_pid.rc == 0 and qpdf_mem_usage.stdout | float > 98
