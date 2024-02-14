@@ -1,0 +1,18 @@
+- name: Start Atlassian services
+  hosts: ip goes here
+  become: true
+  tasks:
+  - name: Start Jira
+    shell: |
+      su - jira -c "/opt/Atlassian-Jira/current/bin/start-jira.sh"
+    become_user: root
+
+  - name: Start Confluence
+    shell: |
+      su - confluence -c "/opt/Atlassian-Confluence/current/bin/start-confluence.sh"
+    become_user: root
+
+  - name: Start Fisheye
+    shell: |
+      su - fisheye -c "/opt/Atlassian-Fisheye/current/bin/start.sh"
+    become_user: root

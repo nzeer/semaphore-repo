@@ -1,0 +1,20 @@
+- name: Stop Atlassian services
+  hosts: ip goes here
+  become: true
+  tasks:
+  - name: Stop Confluence
+    shell: |
+      su - confluence -c "/opt/Atlassian-Confluence/current/bin/stop-confluence.sh"
+    become_user: root
+
+  - name: Stop Fisheye
+    shell: |
+      su - fisheye -c "/opt/Atlassian-Fisheye/current/bin/stop.sh"
+    become_user: root
+  
+  - name: Stop Jira
+    shell: |
+      su - jira -c "/opt/Atlassian-Jira/current/bin/stop-jira.sh"
+    become_user: root
+
+  
