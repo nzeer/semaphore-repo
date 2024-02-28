@@ -1,0 +1,56 @@
+---
+- name: Configure RHEL 9 as a web server
+  hosts: webservers
+  become: yes
+  vars:
+    domain_name: "yourdomain.com"
+    additional_domains: ["www.yourdomain.com"]
+
+  tasks:
+    - name: Update all packages to their latest versions
+      dnf:
+        name: "*"
+        state: latest
+
+    - name: Install Apache HTTP Server
+      dnf:
+        name: httpd
+        state: present
+
+    - name: Start and enable Apache service
+      systemd:
+        name: httpd
+        enabled: yes
+        state: started
+
+    - name: Open HTTP and HTTPS ports in the firewall
+      firewalld:
+        service: "{{ item }}"
+        permanent: yes
+        state: enabled
+      loop: [http, https]
+      notify: Reload firewalld
+
+    - name: Install EPEL release
+      dnf:
+        name: epel-release
+        state: present
+
+    - name: Install Certbot for Let's Encrypt SSL
+      dnf:
+        name:
+          - certbot
+          - python3-certbot-apache
+        state: present
+
+    - name: Obtain and Install SSL certificate
+      shell: |
+        certbot --apache -d {{ domain_name }}{% for domain in additional_domains %} -d {{ domain }}{% endfor %} --non-interactive --agree-tos -m your-email@example.com --redirect
+      args:
+        creates: /etc/letsencrypt/live/{{ domain_name }}
+
+  handlers:
+    - name: Reload firewalld
+      service:
+        name: firewalld
+        state: reloaded
