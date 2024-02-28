@@ -1,0 +1,18 @@
+---
+- name: Create a user and add to wheel group
+  hosts: all
+  become: yes # Necessary for privilege escalation
+  tasks:
+    - name: Create a new user
+      user:
+        name: username # Replace 'username' with the desired username
+        state: present
+        create_home: yes
+        shell: /bin/bash # Specify the default shell for the user
+
+    - name: Add user to wheel group
+      user:
+        name: username # Ensure this matches the username specified above
+        group: wheel # Primary group
+        append: yes # This ensures the user is added to the group without removing them from other groups
+
