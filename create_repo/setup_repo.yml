@@ -1,0 +1,62 @@
+---
+- name: Setup a local repository on RHEL 9
+  hosts: your_rhel9_hosts
+  become: yes
+  vars:
+    repo_dir: /var/www/html/repos/my_custom_repo
+    repo_name: my_custom_repo
+    baseurl: http://{{ ansible_default_ipv4.address }}/repos/my_custom_repo/
+
+  tasks:
+    - name: Install createrepo and httpd packages
+      dnf:
+        name:
+          - createrepo
+          - httpd
+        state: present
+
+    - name: Create repository directory
+      file:
+        path: "{{ repo_dir }}"
+        state: directory
+        mode: "0755"
+
+    - name: Copy RPM packages to the repository directory
+      copy:
+        src: /path/to/your/rpms/
+        dest: "{{ repo_dir }}"
+        remote_src: yes
+      notify: Create/update repository
+
+    - name: Ensure httpd is running and enabled
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+
+    - name: Configure firewall for httpd service
+      firewalld:
+        service: http
+        permanent: yes
+        state: enabled
+        immediate: yes
+
+  handlers:
+    - name: Create/update repository
+      command: createrepo {{ repo_dir }}
+
+    - name: Restart httpd
+      service:
+        name: httpd
+        state: restarted
+
+  post_tasks:
+    - name: Add repository to dnf/yum
+      copy:
+        dest: "/etc/yum.repos.d/{{ repo_name }}.repo"
+        content: |
+          [{{ repo_name }}]
+          name={{ repo_name }}
+          baseurl={{ baseurl }}
+          enabled=1
+          gpgcheck=0

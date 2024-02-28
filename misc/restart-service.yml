@@ -7,6 +7,3 @@
     ansible.builtin.service:
       name: your_service_name
       state: restarted
-    service:
-      name: your_service_name
-      state: restarted
